@@ -76,6 +76,7 @@ class Days(db.Model):
 
     def serialize(self):
         return {
+            "user_id": self.user_id,
             "first_day": self.first_day,
-            "secon_day": self.secon_day
+            "second_day": self.second_day
         }

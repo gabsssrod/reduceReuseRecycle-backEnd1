@@ -84,8 +84,19 @@ def add_day():
         
         db.session.commit()
         return jsonify({
-            'msg': 'Day Added!'
+            'msg': 'Day Added!',
+            "first_day": body["first_day"],
+            "second_day": body["second_day"]
         })
+
+@app.route('/get_days', methods=['GET'])
+def days_picked():
+    if request.method == 'GET':
+        days = Days.query.all()
+        if not days:
+            return jsonify({'msg': 'No days found'}), 404
+
+        return jsonify( [x.serialize() for x in days ] ), 200
 
 # @app.route('/login', methods=['POST'])
 # def login():
