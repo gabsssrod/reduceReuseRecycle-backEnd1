@@ -89,10 +89,12 @@ def add_day():
             "second_day": body["second_day"]
         })
 
-@app.route('/get_days', methods=['GET'])
+@app.route('/get_days', methods=['POST'])
 def days_picked():
-    if request.method == 'GET':
-        days = Days.query.all()
+    if request.method == 'POST':
+        body = request.get_json()
+
+        days = Days.query.filter_by(user_id=body['userId']).first()
         if not days:
             return jsonify({'msg': 'No days found'}), 404
 
