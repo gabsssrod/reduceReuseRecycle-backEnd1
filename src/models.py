@@ -8,7 +8,6 @@ class Users(db.Model):
     last_name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
-    zip = db.Column(db.Integer(), nullable=False)
     
     def __repr__(self):
         return '<Users %r>' % self.first_name
@@ -19,7 +18,6 @@ class Users(db.Model):
         "last_name": self.last_name,
         "email": self.email,
         "password": self.password,
-        "zip": self.zip
         }
 
 class Objects(db.Model):
@@ -47,7 +45,6 @@ class Resource_Centers(db.Model):
     address = db.Column(db.Integer, nullable=False)
     city = db.Column(db.String(100), nullable=False)
     state = db.Column(db.String(30), nullable=False)
-    zip = db.Column(db.Integer, nullable=False)
     hours = db.Column(db.Integer, nullable=False)
     phone_number = db.Column(db.Integer, nullable=False)
     website = db.Column(db.String(200), nullable=True)
@@ -62,7 +59,6 @@ class Resource_Centers(db.Model):
             "address": self.address,
             "city": self.city,
             "state": self.state,
-            "zip": self.zip,
             "hours": self.hours,
             "phone_number": self.phone_number,
             "website": self.website,
