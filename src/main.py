@@ -94,32 +94,12 @@ def days_picked():
     if request.method == 'POST':
         body = request.get_json()
 
-        days = Days.query.filter_by(user_id=body['userId']).first()
+        days = Days.query.filter_by(user_id=body['userId'])
         if not days:
             return jsonify({'msg': 'No days found'}), 404
 
         return jsonify( [x.serialize() for x in days ] ), 200
 
-# @app.route('/login', methods=['POST'])
-# def login():
-#     if not request.is_json:
-#         return jsonify({"msg": "Missing JSON in request"}), 400
-
-#     params = request.get_json()
-#     email = params.get('email', None)
-#     password = params.get('password', None)
-
-#     if not email:
-#         return jsonify({"msg": "Missing email parameter"}), 400
-#     if not password:
-#         return jsonify({"msg": "Missing password parameter"}), 400
-    
-#     usercheck = Users.query.filter_by(email=email, password=password).first()
-#     if usercheck == None:
-#         return jsonify({"msg": "Bad username or password"}), 401
-
-#     ret = {'jwt': create_jwt(identity=password)}
-#     return jsonify(ret), 200
 
 
 @app.route('/login', methods=['POST'])
@@ -144,21 +124,6 @@ def handle_login():
               'last_name': user.last_name
               })
 
-# @app.route('/edit_user', methods=['PUT'])
-# def edit_user():
-#     body = request.get_json()
-#     if request.method == 'PUT':
-#         first_name = body["first_name"],
-#         last_name = body["last_name"],
-#         email = body["email"],
-#         password = body["password"],
-#         zip = body["zip"]
-
-#         db.sessions.commit()
-#         return jsonify({
-#             'msg': 'Info Updated!'
-#         })
-        
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

@@ -80,3 +80,17 @@ class Days(db.Model):
             "first_day": self.first_day,
             "second_day": self.second_day
         }
+
+class Events(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_date = db.Column(db.String(200), nullable=False)
+    event_name = db.Column(db.String(200), nullable=False)
+
+    def __repr__(self):
+        return '<Events %r>' % self.event_name
+    
+    def serialize(self):
+        return {
+            "event_date": self.event_date,
+            "event_name": self.event_name
+        }
