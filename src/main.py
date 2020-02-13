@@ -125,6 +125,19 @@ def handle_login():
               })
 
 
+@app.route('/sendmsg', methods=['POST'])
+def notification():
+
+    body = request.get_json()
+    
+    if 'message' not in body:
+        raise APIException('must specify message in body', 400)
+
+    send_sms(body['message'])
+    
+    return jsonify({'msg':'message sent!'})
+
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
