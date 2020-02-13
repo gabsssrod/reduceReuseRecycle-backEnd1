@@ -11,6 +11,7 @@ from models import db, Users, Objects, Resource_Centers,Days
 from flask_jwt_simple import (
     JWTManager, jwt_required, create_jwt, get_jwt_identity
 )
+from send_sms import my_function
 
 #from models import Person
 
@@ -127,15 +128,16 @@ def handle_login():
 
 @app.route('/sendmsg', methods=['POST'])
 def notification():
+    my_function()
 
-    body = request.get_json()
+#     body = request.get_json()
     
-    if 'message' not in body:
-        raise APIException('must specify message in body', 400)
+#     if 'message' not in body:
+#         raise APIException('must specify message in body', 400)
 
-    send_sms(body['message'])
+#     send_sms(body['message'])
     
-    return jsonify({'msg':'message sent!'})
+#     return jsonify({'msg':'message sent!'})
 
 
 # this only runs if `$ python src/main.py` is executed
